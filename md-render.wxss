@@ -1,0 +1,209 @@
+/**
+ * 美化版 Markdown 渲染组件样式
+ * 基于原样式优化：更现代、阅读友好、视觉层次感强
+ */
+
+ .md-render {
+  font-size: 32rpx;
+  line-height: 2;
+  color: #333;
+  word-wrap: break-word;
+  word-break: break-all;
+  padding: 20rpx 0;
+}
+
+/* 标题样式 */
+.md-heading {
+  font-weight: 700;
+  margin: 20rpx 0 15rpx 0;
+  color: #1e293b;
+  line-height: 1.4;
+}
+
+.md-h1 {
+  font-size: 52rpx;
+  border-bottom: 4rpx solid #e2e8f0;
+  padding-bottom: 20rpx;
+  margin-top: 48rpx;
+}
+
+.md-h2 {
+  font-size: 44rpx;
+  border-bottom: 3rpx solid #e2e8f0;
+  padding-bottom: 16rpx;
+}
+
+.md-h3 {
+  font-size: 38rpx;
+}
+
+.md-h4 {
+  font-size: 34rpx;
+}
+
+.md-h5 {
+  font-size: 30rpx;
+}
+
+.md-h6 {
+  font-size: 28rpx;
+  color: #64748b;
+}
+
+/* 段落样式 */
+.md-paragraph {
+  margin: 20rpx 0rpx 15rpx 0rpx;
+  text-align: justify;
+}
+
+/* 行内元素容器 */
+.md-inline-wrapper {
+  display: inline;
+}
+
+/* 文本样式 */
+.md-text {
+  display: inline;
+}
+
+/* 粗体 */
+.md-bold {
+  font-weight: bold;
+  display: inline;
+}
+
+/* 斜体 */
+.md-italic {
+  font-style: italic;
+  display: inline;
+}
+
+/* 删除线 */
+.md-strike {
+  text-decoration: line-through;
+  color: #94a3b8;
+  display: inline;
+}
+
+/* 行内代码 */
+.md-inline-code {
+  background-color: #f1f5f9;
+  color: #e11d48;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+  font-family: 'SF Mono', Consolas, Monaco, 'Courier New', monospace;
+  font-size: 28rpx;
+  display: inline;
+}
+
+/* 链接 */
+.md-link {
+  color: #2563eb;
+  text-decoration: none;
+  display: inline;
+  transition: color 0.2s;
+}
+
+.md-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* 图片 */
+.md-image {
+  max-width: 100%;
+  height: auto;
+  margin: 32rpx 0;
+  border-radius: 12rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  display: block;
+}
+
+/* 代码块 */
+.md-codeblock {
+  background-color: #1e1e1e;
+  border-radius: 16rpx;
+  margin: 32rpx 0;
+  overflow: hidden;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+}
+
+.md-codeblock-lang {
+  background-color: #2d2d2d;
+  color: #9ca3af;
+  font-size: 26rpx;
+  padding: 12rpx 24rpx;
+  border-bottom: 1rpx solid #3e3e3e;
+}
+
+.md-codeblock-scroll {
+  padding: 24rpx;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.md-codeblock-text {
+  color: #d4d4d4;
+  font-family: 'SF Mono', Consolas, Monaco, 'Courier New', monospace;
+  font-size: 28rpx;
+  line-height: 1.7;
+}
+
+/* 引用块 */
+.md-blockquote {
+  border-left: 8rpx solid #3b82f6;
+  padding: 24rpx 32rpx;
+  margin: 32rpx 0;
+  background-color: #f8fafc;
+  border-radius: 0 12rpx 12rpx 0;
+  color: #475569;
+  font-style: italic;
+}
+
+/* 分隔线 */
+.md-hr {
+  border: none;
+  border-top: 3rpx dashed #cbd5e1;
+  margin: 48rpx 0;
+}
+
+/* 列表样式 */
+.md-list {
+  margin: 24rpx 0;
+}
+
+.md-list-item {
+  display: flex;
+  align-items: flex-start;
+  margin: 12rpx 0;
+  line-height: 1.8;
+}
+
+.md-list-marker {
+  flex-shrink: 0;
+  width: 50rpx;
+  color: #64748b;
+  text-align: center;
+  font-weight: bold;
+}
+
+.md-list-unordered .md-list-marker {
+  font-size: 32rpx;
+  line-height: 1.6;
+  color: #3b82f6;
+}
+
+.md-list-ordered .md-list-marker {
+  font-size: 30rpx;
+}
+
+.md-list-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 嵌套列表 */
+.md-list .md-list {
+  margin: 12rpx 0 12rpx 40rpx;
+  padding-left: 0;
+}

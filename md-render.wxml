@@ -1,0 +1,83 @@
+<!--
+  Markdown 渲染组件模板
+  直接将解析后的节点树渲染成 WXML
+-->
+
+<view class="md-render">
+  <!-- 遍历顶级节点 -->
+  <block wx:for="{{nodes}}" wx:key="index">
+    <!-- 标题 -->
+    <view wx:if="{{item.type === 'heading'}}" class="md-heading md-h{{item.level}}">
+      <template is="inline-nodes" data="{{children: item.children}}" />
+    </view>
+
+    <!-- 段落 -->
+    <view wx:elif="{{item.type === 'paragraph'}}" class="md-paragraph">
+      <template is="inline-nodes" data="{{children: item.children}}" />
+    </view>
+
+    <!-- 代码块 -->
+    <view wx:elif="{{item.type === 'codeblock'}}" class="md-codeblock">
+      <view wx:if="{{item.language}}" class="md-codeblock-lang">{{item.language}}</view>
+      <scroll-view scroll-x class="md-codeblock-scroll">
+        <text class="md-codeblock-text" selectable>{{item.content}}</text>
+      </scroll-view>
+    </view>
+
+    <!-- 引用块 -->
+    <view wx:elif="{{item.type === 'blockquote'}}" class="md-blockquote">
+      <template is="inline-nodes" data="{{children: item.children}}" />
+    </view>
+
+    <!-- 分隔线 -->
+    <view wx:elif="{{item.type === 'hr'}}" class="md-hr"></view>
+
+    <!-- 列表 -->
+    <view wx:elif="{{item.type === 'list'}}" class="md-list {{item.ordered ? 'md-list-ordered' : 'md-list-unordered'}}">
+      <view wx:for="{{item.items}}" wx:for-item="listItem" wx:for-index="listIndex" wx:key="listIndex" class="md-list-item">
+        <text class="md-list-marker">{{item.ordered ? (listIndex + 1) + '.' : '•'}}</text>
+        <view class="md-list-content">
+          <template is="inline-nodes" data="{{children: listItem.children}}" />
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+
+<!-- 行内元素模板 -->
+<template name="inline-nodes">
+  <text class="md-inline-wrapper">
+    <block wx:for="{{children}}" wx:key="index">
+      <!-- 普通文本 -->
+      <text wx:if="{{item.type === 'text'}}" class="md-text">{{item.content}}</text>
+
+      <!-- 粗体 -->
+      <text wx:elif="{{item.type === 'bold'}}" class="md-bold">{{item.content}}</text>
+
+      <!-- 斜体 -->
+      <text wx:elif="{{item.type === 'italic'}}" class="md-italic">{{item.content}}</text>
+
+      <!-- 删除线 -->
+      <text wx:elif="{{item.type === 'strike'}}" class="md-strike">{{item.content}}</text>
+
+      <!-- 行内代码 -->
+      <text wx:elif="{{item.type === 'code'}}" class="md-inline-code">{{item.content}}</text>
+
+      <!-- 链接 - 使用 text 包裹避免嵌套问题 -->
+      <text wx:elif="{{item.type === 'link'}}" class="md-link" data-href="{{item.href}}">{{item.text}}</text>
+    </block>
+  </text>
+  
+  <!-- 图片需要单独处理，不能嵌套在 text 中 -->
+  <block wx:for="{{children}}" wx:key="index">
+    <image 
+      wx:if="{{item.type === 'image'}}" 
+      class="md-image" 
+      src="{{item.src}}" 
+      mode="widthFix"
+      data-src="{{item.src}}"
+      bindtap="onImageTap"
+      show-menu-by-longpress
+    />
+  </block>
+</template>
