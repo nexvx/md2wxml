@@ -38,6 +38,17 @@
         <text class="md-list-marker">{{item.ordered ? (listIndex + 1) + '.' : '•'}}</text>
         <view class="md-list-content">
           <template is="inline-nodes" data="{{children: listItem.children}}" />
+          <!-- 嵌套列表 -->
+          <view wx:if="{{listItem.nestedList}}" class="md-nested-list">
+            <view class="md-list {{listItem.nestedList.ordered ? 'md-list-ordered' : 'md-list-unordered'}}">
+              <view wx:for="{{listItem.nestedList.items}}" wx:for-item="nestedItem" wx:for-index="nestedIndex" wx:key="nestedIndex" class="md-list-item">
+                <text class="md-list-marker">{{listItem.nestedList.ordered ? (nestedIndex + 1) + '.' : '•'}}</text>
+                <view class="md-list-content">
+                  <template is="inline-nodes" data="{{children: nestedItem.children}}" />
+                </view>
+              </view>
+            </view>
+          </view>
         </view>
       </view>
     </view>
